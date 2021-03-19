@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import PublicationList from '../../components/PublicationList'
 
-import Layout from '../../components/Layout'
+import getPgs from '../../lib/getPgs'
 
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
@@ -8,19 +8,7 @@ import orderBy from 'lodash/orderBy'
 import startCase from 'lodash/startCase'
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:8000/api/v1/publico/')
-    const pgs = await res.json()
-    const paths = pgs.map(PG => {
-        return {
-            params: {
-                pg: PG.initials.toLowerCase()
-            }
-        }
-    })
-    return {
-        paths,
-        fallback: false
-    }
+    return getPgs()
 }
 
 export async function getStaticProps({ params }) {
@@ -36,12 +24,7 @@ export async function getStaticProps({ params }) {
 
 export default function Articles({ articles }) {
     return(
-        <Layout>
-            <Head><title>Artigos</title></Head>
-            <div className="w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
-                <div className="w-full flex justify-center">
-                    <h1 className="text-blue-900 text-4xl font-normal">Artigos</h1>
-                </div>
+        <PublicationList title="ARTIGOS">
                 { articles.map(article => {
                     return(
                         <div className="py-6">
@@ -61,7 +44,6 @@ export default function Articles({ articles }) {
                         </div>
                     )
                 })}
-            </div>
-        </Layout>
+        </PublicationList>
     )
 }

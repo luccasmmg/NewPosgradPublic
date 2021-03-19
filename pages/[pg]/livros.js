@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import PublicationList from '../../components/PublicationList'
 
-import Layout from '../../components/Layout'
+import getPgs from '../../lib/getPgs'
 
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
@@ -8,19 +8,7 @@ import orderBy from 'lodash/orderBy'
 import startCase from 'lodash/startCase'
 
 export async function getStaticPaths() {
-    const res = await fetch('http://localhost:8000/api/v1/publico/')
-    const pgs = await res.json()
-    const paths = pgs.map(PG => {
-        return {
-            params: {
-                pg: PG.initials.toLowerCase()
-            }
-        }
-    })
-    return {
-        paths,
-        fallback: false
-    }
+    return getPgs()
 }
 
 export async function getStaticProps({ params }) {
@@ -36,16 +24,11 @@ export async function getStaticProps({ params }) {
 
 export default function Books({ books }) {
     return(
-        <Layout>
-            <Head><title>Livros</title></Head>
-            <div className="w-full px-4 md:px-6 text-xl text-gray-800">
-                <div className="w-full flex justify-center items-center">
-                    <h1 className="text-blue-900 text-4xl font-normal">Livros</h1>
-                </div>
+        <PublicationList title="LIVROS">
                 { books.map(book => {
                     return(
-                        <div className="flex-grow w-full py-6">
-                            <h3 className="py-4 text-blue-700 w-full" key={book.nomeProducao}>{book.nomeProducao}</h3>
+                        <div className="flex-grow w-full py-6 border-b-4 border-blue-400">
+                            <h3 className="py-4 text-blue-700 w-full" key={`${book.nomeProducao}-${book.isbn}`}>{book.nomeProducao}</h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{book.anoProducao}</li>
                                 <li><strong>ISBN: </strong>{book.isbn}</li>
@@ -61,7 +44,6 @@ export default function Books({ books }) {
                         </div>
                     )
                 })}
-            </div>
-        </Layout>
+        </PublicationList>
     )
 }
