@@ -24,10 +24,10 @@ export async function getStaticProps({ params }) {
 
 export default function Articles({ articles }) {
     return(
-        <PublicationList title="ARTIGOS">
+        <PublicationList title="Artigos publicados">
                 { articles.map(article => {
                     return(
-                        <div key={article.sequenciaProducao}className="py-6">
+                        <div key={article.sequenciaProducao} className="py-6 border-b-4 border-blue-400">
                             <h3 className="py-4 text-blue-700 w-full">{article.nomeProducao}</h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{article.anoProducao}</li>
