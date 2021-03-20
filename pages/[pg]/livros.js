@@ -27,8 +27,8 @@ export default function Books({ books }) {
         <PublicationList title="LIVROS">
                 { books.map(book => {
                     return(
-                        <div className="flex-grow w-full py-6 border-b-4 border-blue-400">
-                            <h3 className="py-4 text-blue-700 w-full" key={`${book.nomeProducao}-${book.isbn}`}>{book.nomeProducao}</h3>
+                        <div key={book.sequenciaProducao} className="flex-grow w-full py-6 border-b-4 border-blue-400">
+                            <h3 className="py-4 text-blue-700 w-full">{book.nomeProducao}</h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{book.anoProducao}</li>
                                 <li><strong>ISBN: </strong>{book.isbn}</li>

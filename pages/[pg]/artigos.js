@@ -27,8 +27,8 @@ export default function Articles({ articles }) {
         <PublicationList title="ARTIGOS">
                 { articles.map(article => {
                     return(
-                        <div className="py-6">
-                            <h3 className="py-4 text-blue-700 w-full" key={article.nomeProducao}>{article.nomeProducao}</h3>
+                        <div key={article.sequenciaProducao}className="py-6">
+                            <h3 className="py-4 text-blue-700 w-full">{article.nomeProducao}</h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{article.anoProducao}</li>
                                 <li><strong>ISSN: </strong>{article.issn}</li>
