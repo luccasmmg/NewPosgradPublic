@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -65,7 +65,10 @@ export default function TopNav() {
                 </button>
                 </div>
                 <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
-                    <SubMenu key={1} title="Acadêmico" titleIcon={faBriefcase}>
+                    <SubMenu key={1} title="Acadêmico" titleIcon={faUserGraduate}>
+                        <NavLink href='disciplinas' title='Disciplinas' linkIcon={faChalkboardTeacher}/>
+                    </SubMenu>
+                    <SubMenu key={1} title="Publicações" titleIcon={faBriefcase}>
                         <NavLink href='artigos' title='Artigos' linkIcon={faFile}/>
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>

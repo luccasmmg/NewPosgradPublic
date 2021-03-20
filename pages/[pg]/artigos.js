@@ -1,4 +1,4 @@
-import PublicationList from '../../components/PublicationList'
+import BasicPage from '../../components/BasicPage'
 
 import getPgs from '../../lib/getPgs'
 
@@ -24,7 +24,7 @@ export async function getStaticProps({ params }) {
 
 export default function Articles({ articles }) {
     return(
-        <PublicationList title="Artigos publicados">
+        <BasicPage title="Artigos publicados">
                 { articles.map(article => {
                     return(
                         <div key={article.sequenciaProducao} className="py-6 border-b-4 border-blue-400">
@@ -44,6 +44,6 @@ export default function Articles({ articles }) {
                         </div>
                     )
                 })}
-        </PublicationList>
+        </BasicPage>
     )
 }

@@ -1,4 +1,4 @@
-import PublicationList from '../../components/PublicationList'
+import BasicPage from '../../components/BasicPage'
 
 import getPgs from '../../lib/getPgs'
 
@@ -24,7 +24,7 @@ export async function getStaticProps({ params }) {
 
 export default function Books({ books }) {
     return(
-        <PublicationList title="LIVROS">
+        <BasicPage title="LIVROS">
                 { books.map(book => {
                     return(
                         <div key={book.sequenciaProducao} className="flex-grow w-full py-6 border-b-4 border-blue-400">
@@ -44,6 +44,6 @@ export default function Books({ books }) {
                         </div>
                     )
                 })}
-        </PublicationList>
+        </BasicPage>
     )
 }
