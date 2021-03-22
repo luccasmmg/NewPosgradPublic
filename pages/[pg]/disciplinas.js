@@ -5,7 +5,6 @@ import getPgs from '../../lib/getPgs'
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
 import orderBy from 'lodash/orderBy'
-import startCase from 'lodash/startCase'
 
 export async function getStaticPaths() {
     return getPgs()
