@@ -25,10 +25,11 @@ export async function getStaticProps({ params }) {
 export default function Chapters({ chapters }) {
     return(
         <BasicPage title="CAPÍTULOS DE LIVROS">
+            <div className="flex flex-wrap justify-between">
                 { chapters.map(chapter => {
                     return(
-                        <div className="flex-grow w-full py-6 border-b-4 border-blue-400">
-                            <h3 className="py-4 text-blue-700 w-full" key={`${chapter.nomeProducao}-${chapter.isbn}`}>{chapter.nomeProducao}</h3>
+                        <div key={chapter.nomeProducao} className="flex-grow md:w-1/2 px-4 py-6 border-b-4 border-blue-400">
+                            <h3 className="py-4"><strong>{chapter.nomeProducao}</strong></h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{chapter.anoProducao}</li>
                                 <li><strong>ISBN: </strong>{chapter.isbn}</li>
@@ -44,6 +45,7 @@ export default function Chapters({ chapters }) {
                         </div>
                     )
                 })}
+            </div>
         </BasicPage>
     )
 }

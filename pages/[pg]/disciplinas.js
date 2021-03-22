@@ -30,7 +30,7 @@ function SyllabusGroup({ components, title }) {
     const tdCSS = 'text-center py-3 px-4 text-sm'
     return(
         <>
-            <table className="my-8 rounded-lg table-auto">
+            <table className="my-8 rounded-lg w-full table-auto">
                 <thead className="rounded-t-lg bg-blue-800 text-white">
                     <tr>
                         <th className="py-4 text-xl uppercase" colSpan="3">{title}</th>
@@ -59,7 +59,7 @@ export default function Books({ syllabus }) {
     return(
         <BasicPage title="DISCIPLINAS">
                 { syllabus.map(groupOfComponents => {
-                    return(<SyllabusGroup components={groupOfComponents.list} title={groupOfComponents.name} />)
+                    return(<SyllabusGroup key={groupOfComponents.name} components={groupOfComponents.list} title={groupOfComponents.name} />)
                 })}
         </BasicPage>
     )

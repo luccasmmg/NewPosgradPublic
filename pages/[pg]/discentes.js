@@ -40,7 +40,7 @@ export async function getStaticProps({ params }) {
     }
 }
 
-function StudentGroup({ students, title }) {
+function StudentGroup({ students }) {
     const thCSS = 'text-center py-3 px-4 uppercase font-semibold text-sm'
     const tdCSS = 'text-center py-3 px-4 text-sm'
     return(

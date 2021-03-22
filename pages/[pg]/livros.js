@@ -25,10 +25,11 @@ export async function getStaticProps({ params }) {
 export default function Books({ books }) {
     return(
         <BasicPage title="LIVROS">
+            <div className="flex flex-wrap justify-between">
                 { books.map(book => {
                     return(
-                        <div key={book.sequenciaProducao} className="flex-grow w-full py-6 border-b-4 border-blue-400">
-                            <h3 className="py-4 text-blue-700 w-full">{book.nomeProducao}</h3>
+                        <div key={book.sequenciaProducao} className="flex-grow md:w-1/2 px-4 py-6 border-b-4 border-blue-400">
+                            <h3 className="py-4"><strong>{book.nomeProducao}</strong></h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{book.anoProducao}</li>
                                 <li><strong>ISBN: </strong>{book.isbn}</li>
@@ -44,6 +45,7 @@ export default function Books({ books }) {
                         </div>
                     )
                 })}
+            </div>
         </BasicPage>
     )
 }

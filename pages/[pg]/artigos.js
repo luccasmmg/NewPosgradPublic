@@ -25,10 +25,11 @@ export async function getStaticProps({ params }) {
 export default function Articles({ articles }) {
     return(
         <BasicPage title="Artigos publicados">
+            <div className="flex flex-wrap justify-between">
                 { articles.map(article => {
                     return(
-                        <div key={article.sequenciaProducao} className="py-6 border-b-4 border-blue-400">
-                            <h3 className="py-4 text-blue-700 w-full">{article.nomeProducao}</h3>
+                        <div key={article.sequenciaProducao} className="md:w-1/2 px-4 py-6 border-b-4 border-blue-400">
+                            <h3 className="py-4"><strong>{article.nomeProducao}</strong></h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{article.anoProducao}</li>
                                 <li><strong>ISSN: </strong>{article.issn}</li>
@@ -44,6 +45,7 @@ export default function Articles({ articles }) {
                         </div>
                     )
                 })}
+            </div>
         </BasicPage>
     )
 }
