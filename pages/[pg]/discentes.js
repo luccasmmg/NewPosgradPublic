@@ -45,7 +45,7 @@ function StudentGroup({ students }) {
     const tdCSS = 'text-center py-3 px-4 text-sm'
     return(
         <>
-            <table className="w-full my-8">
+            <table className="hidden sm:table w-full my-8">
                 <thead className="w-full bg-blue-800 text-white">
                     <tr>
                         <th className={thCSS}>Nome</th>
@@ -67,11 +67,32 @@ function StudentGroup({ students }) {
     )
 }
 
+function StudentsList({ students }) {
+    return(
+        <div className="sm:hidden flex-wrap justify-between">
+            { students.map(student => {
+                return(
+                    <div key={student.matricula} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                        <h3 className="py-4"><strong>{student.nomeDiscente}</strong></h3>
+                        <ul>
+                            <li><strong>Matrícula: </strong>{student.matricula}</li>
+                            <li><strong>Orientador: </strong>{student.advisor.nameAdvisor ? student.advisor.nameAdvisor : student.advisor}</li>
+                        </ul>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
 export default function Students({ coursesWithStudents }) {
     return(
         <BasicPage title="DISCENTES">
                 { coursesWithStudents.map(courseWithStudents => {
                     return(<StudentGroup key={courseWithStudents.courseName} students={orderBy(courseWithStudents.students, 'nome')} title={courseWithStudents.courseName}/>)
+                })}
+                { coursesWithStudents.map(courseWithStudents => {
+                    return(<StudentsList key={courseWithStudents.courseName} students={orderBy(courseWithStudents.students, 'nome')} title={courseWithStudents.courseName}/>)
                 })}
         </BasicPage>
     )

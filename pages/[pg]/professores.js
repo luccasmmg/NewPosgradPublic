@@ -34,7 +34,7 @@ function ProfessorsGroup({ professors }) {
     const tdCSS = 'text-center py-3 px-4 text-sm'
     return(
         <>
-            <table className="my-8 rounded-lg w-full table-auto">
+            <table className="hidden md:table my-8 rounded-lg w-full table-auto">
                 <thead className="rounded-t-lg bg-blue-800 text-white">
                     <tr>
                         <th className={thCSS}>Nome</th>
@@ -63,10 +63,34 @@ function ProfessorsGroup({ professors }) {
     )
 }
 
+function ProfessorsList({ professors }) {
+    return(
+        <div className="md:hidden flex-wrap justify-between">
+            { professors.map(professor => {
+                return(
+                    <div key={professor.name} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                        <h3 className="py-4"><strong>{professor.name}</strong></h3>
+                        <ul>
+                            <li><strong>Vínculo: </strong>{professor.level}</li>
+                            <li><strong>Nível: </strong>{professor.rank}</li>
+                            <li><strong>Email: </strong><a mailto={professor.email}>{professor.email}</a></li>
+                            {professor.lattes.includes('lattes.cnpq') 
+                                ? <li><strong>Lattes: </strong><a href={professor.lattes}>{professor.lattes}</a></li> 
+                                : <li>{professor.lattes}</li>
+                            }
+                        </ul>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
 export default function Books({ professors }) {
     return(
         <BasicPage title="PROFESSORES">
-            <ProfessorsGroup professors={professors} />
+                <ProfessorsGroup professors={professors} />
+                <ProfessorsList professors={professors} />
         </BasicPage>
     )
 }
