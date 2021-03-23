@@ -50,7 +50,7 @@ export default function TopNav() {
     const {pg} = useRouter().query
     const [open, setOpen] = useState(false);
     return (
-        <>
+        <div className="p-8">
             <div className="w-full rounded text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
             <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
                 <div className="p-4 flex flex-row items-center justify-between">
@@ -79,6 +79,6 @@ export default function TopNav() {
                 </nav>
             </div>
             </div>
-        </>
+        </div>
     )
 } 

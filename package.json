@@ -12,6 +12,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@headlessui/react": "^0.3.1",
+    "fetch-retry": "^4.1.0",
+    "isomorphic-fetch": "^3.0.0",
     "lodash": "^4.17.21",
     "next": "latest",
     "react": "^17.0.1",
