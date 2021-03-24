@@ -1,8 +1,8 @@
-import BasicPage from '../../components/BasicPage'
-
-import getPgs from '../../lib/getPgs'
+import Link from 'next/link'
 
 import orderBy from 'lodash/orderBy'
+import BasicPage from '../../components/BasicPage'
+import getPgs from '../../lib/getPgs'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/noticias_sigaa`)
+    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/lista_noticias_sigaa`)
     const news_sigaa = await res.json()
     return {
         props: {
@@ -32,7 +32,7 @@ export default function News({ initialNewsSigaa }) {
     const getMoreNews = async function() {
         setLoading(true)
         setOffset(offset + 10)
-        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg}/noticias_sigaa?limit=${offset + 20}&skip=${offset + 10}`)
+        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg}/lista_noticias_sigaa?limit=${offset + 20}&skip=${offset + 10}`)
         const newsToPush = await res.json()
         setNewsSigaa(newsSigaa.concat(newsToPush))
         setLoading(false)
@@ -46,7 +46,7 @@ export default function News({ initialNewsSigaa }) {
                         <div key={news.index} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-blue-400">
                             <h4 className="text-gray-600">{news.date}</h4>
                             <h2 className="text-lg text-gray-700 font-medium hover:underline">{news.title}</h2>
-                            <a href={news.url}>Leia mais...</a>
+                            <Link href={`/${pg}/noticias/${news.index}`}><a>Leia mais...</a></Link>
                         </div>
                     )
                 })}

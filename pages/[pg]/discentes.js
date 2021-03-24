@@ -12,8 +12,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     const resPg = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}`)
-
     const pg = await resPg.json()
+
     const parsedCoursesWithStudents = await Promise.all(pg.courses.map(async (course) => {
         const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/discentes/${course.id_sigaa}`)
         const students = await res.json()

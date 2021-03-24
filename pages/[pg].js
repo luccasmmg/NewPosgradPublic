@@ -5,6 +5,7 @@ import Layout from '../components/Layout'
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
 import { useState } from 'react'
+import fetchRetry from '../lib/fetchRetry'
 
 export async function getStaticPaths() {
     const res = await fetch('http://localhost:8000/api/v1/publico/')
@@ -26,7 +27,7 @@ export async function getStaticProps({ params }) {
     const resPg = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}`)
     const pgData = await resPg.json()
 
-    const resClasses = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`)
+    const resClasses = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`, 10)
     const classesData = await resClasses.json()
     return {
         props: {
@@ -38,7 +39,6 @@ export async function getStaticProps({ params }) {
 
 function Atendimento({ attendance }) {
     const liClasses = 'py-1'
-    const {pg} = useRouter().query
     return(
             <div className="lg:px-24 py-4 px-2 sm:px-4">
                 <div className="border-blue-200 border-b-4">
