@@ -40,7 +40,7 @@ function Atendimento({ attendance }) {
     const liClasses = 'py-1'
     const {pg} = useRouter().query
     return(
-            <div className="py-4 px-2 sm:px-4">
+            <div className="lg:px-24 py-4 px-2 sm:px-4">
                 <div className="border-blue-200 border-b-4">
                     <h1 className="text-blue-900 text-2xl"><FontAwesomeIcon icon={faAddressBook} />{' '}Contato</h1>
                 </div>
@@ -61,7 +61,7 @@ function Atendimento({ attendance }) {
 function Classes({ classes }) {
     const [maxShow, setMaxShow] = useState(5)
     return(
-        <div className="py-4 px-2 max-w-sm sm:px-4">
+        <div className="lg:px-24 py-4 px-2 max-w-sm sm:px-4">
             <div className="border-blue-200 border-b-4">
                 <h1 className="text-blue-900 text-2xl"><FontAwesomeIcon icon={faTable} />{' '}Turmas</h1>
             </div>
@@ -80,7 +80,7 @@ export default function PostGraduation({ pgData, classesData }) {
                 <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>
                 <h1 className="lg:mx-36 pb-8 pt-4 text-2xl text-white font-bold">{pgData.description_small}</h1>
             </div>
-            <div className="flex justify-center">
+            <div className="flex my-4 justify-center">
                 <div className="flex flex-wrap p-4 bg-white">
                     <Atendimento attendance={pgData.attendance} />
                     <Classes classes={classesData} />

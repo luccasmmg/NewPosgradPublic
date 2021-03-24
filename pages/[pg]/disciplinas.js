@@ -5,13 +5,14 @@ import getPgs from '../../lib/getPgs'
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
 import orderBy from 'lodash/orderBy'
+import fetchRetry from '../../lib/fetchRetry'
 
 export async function getStaticPaths() {
     return getPgs()
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/disciplinas`)
+    const res = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/disciplinas`, 5)
     const syllabus = await res.json()
     const parsedSyllabus = syllabus.map(syllabus => mapKeys(syllabus, (v, k) => camelCase(k)))
     const syllabusGrouped = [

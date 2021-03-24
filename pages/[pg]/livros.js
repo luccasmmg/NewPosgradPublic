@@ -1,6 +1,7 @@
 import BasicPage from '../../components/BasicPage'
 
 import getPgs from '../../lib/getPgs'
+import fetchRetry from '../../lib/fetchRetry'
 
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
@@ -12,7 +13,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/livros`)
+    const res = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/livros`, 5)
     const books = await res.json()
     const parsedBooks = books.map(book => mapKeys(book, (v, k) => camelCase(k)))
     return {

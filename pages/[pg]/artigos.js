@@ -6,13 +6,14 @@ import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
 import orderBy from 'lodash/orderBy'
 import startCase from 'lodash/startCase'
+import fetchRetry from '../../lib/fetchRetry'
 
 export async function getStaticPaths() {
     return getPgs()
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/artigos`)
+    const res = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/artigos`, 5)
     const articles = await res.json()
     const parsedArticles = articles.map(article => mapKeys(article, (v, k) => camelCase(k)))
     return {

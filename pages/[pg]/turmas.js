@@ -9,13 +9,14 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faCircleNotch, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
+import fetchRetry from '../../lib/fetchRetry'
 
 export async function getStaticPaths() {
     return getPgs()
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`)
+    const res = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`, 10)
     const classes = await res.json()
     const parsedClasses = classes.map(_class => mapKeys(_class, (v, k) => camelCase(k)))
     return {
