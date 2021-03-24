@@ -7,7 +7,7 @@ import camelCase from 'lodash/camelCase'
 import orderBy from 'lodash/orderBy'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faCircleNotch, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faCircleNotch, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import fetchRetry from '../../lib/fetchRetry'
 
