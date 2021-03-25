@@ -70,13 +70,13 @@ export default function TopNav() {
                         <NavLink href='discentes' title='Discentes' linkIcon={faUserGraduate}/>
                         <NavLink href='professores' title='Docentes' linkIcon={faAppleAlt}/>
                         <NavLink href='turmas' title='Turmas' linkIcon={faTable}/>
+                        <NavLink href='disertacoes' title='Dissertações' linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={2} title="Publicações" titleIcon={faBriefcase}>
                         <NavLink href='artigos' title='Artigos' linkIcon={faFile}/>
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>
                         <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
-                        <NavLink href='repositorio' title='Repositorio Institucional' linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={2} title="Coordenação" titleIcon={faLeaf}>
                         <NavLink href='noticias' title='Notícias' linkIcon={faNewspaper}/>
