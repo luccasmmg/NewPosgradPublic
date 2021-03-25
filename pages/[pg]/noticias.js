@@ -5,7 +5,7 @@ import BasicPage from '../../components/BasicPage'
 import getPgs from '../../lib/getPgs'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDown, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
+import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
@@ -14,34 +14,23 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/lista_noticias_sigaa`)
+    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/lista_noticias_sigaa?all_news=true`)
     const news_sigaa = await res.json()
     return {
         props: {
-            initialNewsSigaa: orderBy(news_sigaa, 'date', 'desc')
+            newsSigaa: orderBy(news_sigaa, 'date', 'desc')
         }
     }
 }
 
-export default function News({ initialNewsSigaa }) {
-    const [newsSigaa, setNewsSigaa] = useState(initialNewsSigaa)
-    const [loading, setLoading] = useState(false)
-    const [offset, setOffset] = useState(0)
+export default function News({ newsSigaa }) {
+    const [limit, setLimit] = useState(10)
     const {pg} = useRouter().query
-
-    const getMoreNews = async function() {
-        setLoading(true)
-        setOffset(offset + 10)
-        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg}/lista_noticias_sigaa?limit=${offset + 20}&skip=${offset + 10}`)
-        const newsToPush = await res.json()
-        setNewsSigaa(newsSigaa.concat(newsToPush))
-        setLoading(false)
-    }
-
+    console.log(newsSigaa.length)
     return(
-        <BasicPage title="Notícias">
+        <BasicPage title="Notíciass">
             <div className="flex flex-wrap justify-between">
-                { newsSigaa.map(news => {
+                { newsSigaa.slice(0, limit).map(news => {
                     return(
                         <div key={news.index} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-blue-400">
                             <h4 className="text-gray-600">{news.date}</h4>
@@ -51,10 +40,7 @@ export default function News({ initialNewsSigaa }) {
                     )
                 })}
             </div>
-            {!loading
-               ? <button onClick={() => getMoreNews()}type="button" className="w-full my-2 focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-md border border-blue-600 hover:bg-blue-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>
-               : <div className="py-4 w-full flex justify-center"><h1 className="text-xl"><FontAwesomeIcon className="animate-spin" icon={faCircleNotch} /> Carregando...</h1></div>
-            }
+            <button onClick={() => setLimit(limit + 10)}type="button" className="w-full my-2 focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-md border border-blue-600 hover:bg-blue-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>
         </BasicPage>
     )
 }

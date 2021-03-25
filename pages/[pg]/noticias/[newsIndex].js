@@ -5,7 +5,7 @@ import getPgs from '../../../lib/getPgs'
 export async function getStaticPaths() {
     const pgs = await getPgs()
     const paths = await Promise.all(pgs.paths.map(async (pg) => {
-        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg.params.pg}/lista_noticias_sigaa`)
+        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg.params.pg}/lista_noticias_sigaa?all_news=true`)
         const newsSigaa = await res.json()
         const paths = newsSigaa.map(news => ({ params: {pg: pg.params.pg, newsIndex: news.index.toString()}}))
         return paths

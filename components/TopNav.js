@@ -75,6 +75,7 @@ export default function TopNav() {
                         <NavLink href='artigos' title='Artigos' linkIcon={faFile}/>
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>
+                        <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
                         <NavLink href='repositorio' title='Repositorio Institucional' linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={2} title="Coordenação" titleIcon={faLeaf}>
