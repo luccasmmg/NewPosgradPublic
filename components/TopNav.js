@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -52,7 +52,7 @@ function SubMenu({title, titleIcon, children}) {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <div className="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48 z-40">
+                <div className="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg lg:w-48 z-40">
                     <div className="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
                         {children}
                     </div>
@@ -69,19 +69,19 @@ export default function TopNav() {
     return (
         <div className="p-8">
             <div className="w-full rounded text-gray-700 bg-white dark-mode:text-gray-200 dark-mode:bg-gray-800">
-            <div className="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div className="flex flex-col max-w-screen-xl px-4 mx-auto lg:items-center lg:justify-between lg:flex-row lg:px-6 lg:px-8">
                 <div className="p-4 flex flex-row items-center justify-between">
                 <Link href={`/${pg}`}>
                     <a className="text-lg font-semibold tracking-widest text-gray-900 uppercase rounded-lg dark-mode:text-white focus:outline-none focus:shadow-outline">{pg}</a>
                 </Link>
-                <button aria-label="abrir-menu" className="md:hidden rounded-lg focus:outline-none focus:shadow-outline" onClick={() => setOpen(!open)}>
+                <button aria-label="abrir-menu" className="lg:hidden rounded-lg focus:outline-none focus:shadow-outline" onClick={() => setOpen(!open)}>
                     <svg fill="currentColor" viewBox="0 0 20 20" className="w-6 h-6">
                     {!open && <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clipRule="evenodd"></path>}
                     {open && <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>}
                     </svg>
                 </button>
                 </div>
-                <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow pb-4 md:pb-0 md:flex md:justify-end md:flex-row`}>
+                <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow pb-4 lg:pb-0 lg:flex lg:justify-end lg:flex-row`}>
                     <SubMenu key={1} title="Acadêmico" titleIcon={faGraduationCap}>
                         <NavLink href='disciplinas' title='Disciplinas' linkIcon={faChalkboardTeacher}/>
                         <NavLink href='discentes' title='Discentes' linkIcon={faUserGraduate}/>
@@ -90,14 +90,21 @@ export default function TopNav() {
                         <NavLink href='dissertacoes' title='Dissertações' linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={2} title="Publicações" titleIcon={faBriefcase}>
-                        <NavLink href='artigos' title='Artigos' linkIcon={faFile}/>
+                        <NavLink href='artigos' title='Artigos' linkIcon={faScroll}/>
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>
                         <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
                     </SubMenu>
-                    <SubMenu key={2} title="Coordenação" titleIcon={faLeaf}>
+                    <SubMenu key={3} title="Coordenação" titleIcon={faLeaf}>
                         <NavLink href='equipe' title='Equipe' linkIcon={faUsers}/>
                         <NavLink href='noticias' title='Notícias' linkIcon={faNewspaper}/>
+                    </SubMenu>
+                    <SubMenu key={4} title="Documentos" titleIcon={faFolderOpen}>
+                        <NavLink href='documentos/resolucoes' title='Resoluções' linkIcon={faFolder}/>
+                        <NavLink href='documentos/atas' title='ATAs' linkIcon={faFolder}/>
+                        <NavLink href='documentos/regimentos' title='Regimentos' linkIcon={faFolder}/>
+                        <NavLink href='documentos/planos' title='Planos' linkIcon={faFolder}/>
+                        <NavLink href='documentos/outros' title='Outros' linkIcon={faFolder}/>
                     </SubMenu>
                 </nav>
             </div>

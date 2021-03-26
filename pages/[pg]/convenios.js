@@ -2,10 +2,6 @@ import BasicPage from '../../components/BasicPage'
 
 import getPgs from '../../lib/getPgs'
 
-import mapKeys from 'lodash/mapKeys'
-import camelCase from 'lodash/camelCase'
-import orderBy from 'lodash/orderBy'
-import startCase from 'lodash/startCase'
 import groupBy from 'lodash/groupBy'
 
 export async function getStaticPaths() {
