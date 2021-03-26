@@ -50,7 +50,7 @@ function Atendimento({ attendance }) {
                     <li className={liClasses}><strong>Horários: </strong>{attendance.schedule}</li>
                     <li className={liClasses}><strong>Telefones: </strong>
                         <ol>
-                            {attendance.phones.map(phone => <li>{phone.number} <strong>`(${phone.type === 'fixed' ? 'Fixo' : 'Celular'})`</strong></li>)}
+                            {attendance.phones.map(phone => <li key={phone.number}>{phone.number} <strong>`(${phone.type === 'fixed' ? 'Fixo' : 'Celular'})`</strong></li>)}
                         </ol>
                     </li>
                 </ul>

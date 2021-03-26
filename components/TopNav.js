@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -19,9 +19,26 @@ function NavLink({href, title, linkIcon}) {
 }
 
 function SubMenu({title, titleIcon, children}) {
+    const node = useRef()
+
     const [isOpen, setIsOpen] = useState(false);
+
+    const handleClick = e => {
+        if (node.current.contains(e.target)) {
+            return;
+        }
+        setIsOpen(false)
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClick)
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        }
+    }, [])
+
     return (
-        <div className="relative">
+        <div ref={node} className="relative">
             <button onClick={() => setIsOpen(!isOpen)} className="flex text-gray-800 flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
             <span><FontAwesomeIcon icon={titleIcon} />{' '}{title}</span>
             <svg fill="currentColor" viewBox="0 0 20 20" className={`${isOpen ? 'rotate-180' : 'rotate-0'} inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1`}><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
@@ -70,7 +87,7 @@ export default function TopNav() {
                         <NavLink href='discentes' title='Discentes' linkIcon={faUserGraduate}/>
                         <NavLink href='professores' title='Docentes' linkIcon={faAppleAlt}/>
                         <NavLink href='turmas' title='Turmas' linkIcon={faTable}/>
-                        <NavLink href='disertacoes' title='Dissertações' linkIcon={faAtlas}/>
+                        <NavLink href='dissertacoes' title='Dissertações' linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={2} title="Publicações" titleIcon={faBriefcase}>
                         <NavLink href='artigos' title='Artigos' linkIcon={faFile}/>
@@ -79,6 +96,7 @@ export default function TopNav() {
                         <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
                     </SubMenu>
                     <SubMenu key={2} title="Coordenação" titleIcon={faLeaf}>
+                        <NavLink href='equipe' title='Equipe' linkIcon={faUsers}/>
                         <NavLink href='noticias' title='Notícias' linkIcon={faNewspaper}/>
                     </SubMenu>
                 </nav>

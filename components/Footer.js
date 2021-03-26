@@ -1,32 +1,24 @@
 export default function Footer() {
+    const linkCSS = "text-white text-md hover:text-bold"
+    const titleColCSS = "font-bold text-white uppercase mb-2"
     return(
         <>
-            <div className="container mx-auto px-6">
-                <div className="sm:flex sm:mt-8">
+            <div className="container mx-auto pb-4 px-6">
+                <div className="sm:flex pb-6 sm:mt-8">
                     <div className="mt-8 sm:mt-0 sm:w-full sm:px-8 flex flex-col md:flex-row justify-around">
                         <div className="flex flex-col">
-                            <span className="font-bold text-gray-700 uppercase mb-2">Footer header 1</span>
-                            <span className="my-2"><a href="#" className="text-blue-700  text-md hover:text-blue-500">link 1</a></span>
-                            <span className="my-2"><a href="#" className="text-blue-700  text-md hover:text-blue-500">link 1</a></span>
-                            <span className="my-2"><a href="#" className="text-blue-700  text-md hover:text-blue-500">link 1</a></span>
+                            <span className="my-1"><a href="http://ufrn.br/" className={linkCSS} >UFRN: Universidade Federal do Rio Grande do Norte</a></span>
+                            <span className="my-1"><a href="https://sigaa.ufrn.br/sigaa/public/home.jsf" className={linkCSS} >SIGAA: Sistema Integrado de Gestão de Atividades Acadêmicas</a></span>
+                            <span className="my-1"><a href="https://ccsa.ufrn.br/portal/" className={linkCSS} >CCSA: Centro de Ciências Sociais Aplicadas</a></span>
                         </div>
                         <div className="flex flex-col">
-                            <span className="font-bold text-gray-700 uppercase mt-4 md:mt-0 mb-2">Footer header 2</span>
-                            <span className="my-2"><a href="#" className="text-blue-700 text-md hover:text-blue-500">link 1</a></span>
-                            <span className="my-2"><a href="#" className="text-blue-700  text-md hover:text-blue-500">link 1</a></span>
-                            <span className="my-2"><a href="#" className="text-blue-700 text-md hover:text-blue-500">link 1</a></span>
+                            <span className="my-1"><a href="http://www.capes.gov.br/" className={linkCSS} >CAPES: Coordenação de Aperfeiçoamento de Pessoal de Nível Superior</a></span>
+                            <span className="my-1"><a href="http://cnpq.br/" className={linkCSS} >CNPq: Conselho Nacional de Desenvolvimento Científico e Tecnológico</a></span>
+                            <span className="my-1"><a href="https://repositorio.ufrn.br/jspui/" className={linkCSS} >RI: Repositório Institucional</a></span>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="container mx-auto px-6">
-                <div className="mt-16 border-t-2 border-gray-300 flex flex-col items-center">
-                    <div className="sm:w-2/3 text-center py-6">
-                        <p className="text-sm text-blue-700 font-bold mb-2">
-                            © 2021 by Luccasmmg
-                        </p>
-                    </div>
-                </div>
+                <span className="sm:px-8 text-white">© 2021 - Projeto Plataforma de Pós-Graduação(v2.0.0) (Centro de Ciências Sociais Aplicadas, Universidade Federal do Rio Grande do Norte)</span>
             </div>
         </>
     )

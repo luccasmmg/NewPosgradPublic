@@ -6,9 +6,6 @@ import getPgs from '../../lib/getPgs'
 
 import groupBy from 'lodash/groupBy'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelopeSquare,  faLink } from '@fortawesome/free-solid-svg-icons'
-
 export async function getStaticPaths() {
     return getPgs()
 }
@@ -27,14 +24,24 @@ export async function getStaticProps({ params }) {
 
 function Card({ person }) {
     const jobs = { 'intern': 'Bolsista', 'coordinator': 'Coordenador', 'vice-coordinator': 'Vice coordenador', 'secretariat': 'Secretariado' }
+    const checkCoordinator = (person) => person.rank.includes('coordinator')
     return(
-        <div className="my-4 mx-2 w-full md:w-9/2 bg-white border-2 border-gray-300 p-5 rounded-md tracking-wide shadow-lg">
-            <h4 id="nome" className="text-xl font-semibold mb-2">{person.name}</h4>
-            <h5 id="cargo" className="text-gray-700 font-semibold mb-2">{jobs[person.rank]}</h5>
-            <div id="header" className="flex"> 
-            <img alt="Foto de perfil" className="w-1/2 rounded-md border-2 border-gray-300" src={person.photo} />
+        <div className={`my-4 w-full ${!checkCoordinator(person) ? 'md:w-9/2 mx-2' : ''} flex flex-col justify-center bg-white rounded-md tracking-wide`}>
+            <div className="flex justify-center">
+                {checkCoordinator(person)
+                    ?<h3 id="nome" className="text-2xl font-semibold mb-2">{person.name}</h3> 
+                    :<h4 id="nome" className="text-xl font-semibold mb-2">{person.name}</h4>
+                }
             </div>
-            <p id="Descrição" className="text-gray-800 mt-2">{person.description}</p>
+            <div className="flex justify-center">
+                <h5 id="cargo" className="text-gray-700 font-semibold mb-2">{jobs[person.rank]}</h5>
+            </div>
+            <div id="header" className="flex flex-wrap flex-col align-center"> 
+            <div className={`${checkCoordinator(person) ? 'rounded-full' : ''} flex justify-center`}>
+                <img alt="Foto de perfil" className={`${!checkCoordinator(person) ? 'w-1/3 rounded-full' : 'rounded-md'}`} src={person.photo} />
+            </div>
+            <p id="Descrição" className="mx-1 text-gray-800 mt-2">{person.description}</p>
+            </div>
         </div>
     )
 }

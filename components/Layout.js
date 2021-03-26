@@ -6,7 +6,7 @@ export default function Layout({ home, children }) {
         <>
             <header className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400"><TopNav></TopNav></header>
             {children}
-            <footer className="p-8 footer bg-white relative pt-1 border-b-2 border-blue-700"><Footer></Footer></footer>
+            <footer className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 border-t-4 border-blue-600 footer relative"><Footer></Footer></footer>
         </>
     )
 }
