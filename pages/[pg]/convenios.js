@@ -12,7 +12,6 @@ export async function getStaticProps({ params }) {
     const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/convenios`)
     const covenants = await res.json()
     const groupedCovenants = groupBy(covenants, (x) => x.finished ? 'finished' : 'unfinished')
-    console.log(groupedCovenants)
     return {
         props: {
             covenants: groupedCovenants

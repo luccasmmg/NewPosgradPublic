@@ -94,6 +94,7 @@ export default function TopNav() {
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>
                         <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
+                        <NavLink href='repositorio' title={`Repositório ${pg}`} linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={3} title="Coordenação" titleIcon={faLeaf}>
                         <NavLink href='equipe' title='Equipe' linkIcon={faUsers}/>
