@@ -45,7 +45,7 @@ export default function Publications({ initialPublications, pg }) {
             <div className="flex flex-wrap justify-between">
                 { publications.map(publication => {
                     return(
-                        <div key={publication.uri} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-blue-400">
+                        <div key={publication.uri} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-red-400">
                             <h4 className="text-gray-600">{publication.issue_date}</h4>
                             <h2 className="text-lg text-gray-700 font-medium">{publication.title}</h2>
                             <ul>
@@ -60,7 +60,7 @@ export default function Publications({ initialPublications, pg }) {
                 })}
             </div>
             {!loading
-               ? <span>{!full && <button onClick={() => getPublications()}type="button" className="w-full my-2 focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-md border border-blue-600 hover:bg-blue-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>}</span>
+               ? <span>{!full && <button onClick={() => getPublications()}type="button" className="w-full my-2 focus:outline-none text-red-600 text-sm py-2.5 px-5 rounded-md border border-red-600 hover:bg-red-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>}</span>
                : <div className="py-4 w-full flex justify-center"><h1 className="text-xl"><FontAwesomeIcon className="animate-spin" icon={faCircleNotch} /> Carregando...</h1></div>
             }
         </BasicPage>

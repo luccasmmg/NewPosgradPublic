@@ -31,7 +31,7 @@ export default function Publications({ publications, pg }) {
             <div className="flex flex-wrap justify-between">
                 { publications.map(publication => {
                     return(
-                        <div key={publication.link} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-blue-400">
+                        <div key={publication.link} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-red-400">
                             <h2 className="text-lg text-gray-700 font-medium">{publication.title}</h2>
                             <ul>
                                 <li className="py-2"><strong>Autores: </strong>{publication.author}</li>

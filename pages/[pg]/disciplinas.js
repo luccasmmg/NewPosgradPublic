@@ -32,7 +32,7 @@ function SyllabusGroup({ components, title }) {
     return(
         <>
             <table className="hidden sm:table my-8 rounded-lg w-full table-auto">
-                <thead className="rounded-t-lg bg-blue-800 text-white">
+                <thead className="rounded-t-lg bg-red-800 text-white">
                     <tr>
                         <th className="py-4 text-xl uppercase" colSpan="3">{title}</th>
                     </tr>
@@ -59,12 +59,12 @@ function SyllabusGroup({ components, title }) {
 function SyllabusList({ components, title }) {
     return(
         <div className="sm:hidden flex-wrap justify-between">
-            <div className="w-full bg-blue-900 flex justify-center items-center border-b-4 border-blue-200">
+            <div className="w-full bg-red-900 flex justify-center items-center border-b-4 border-red-200">
                 <h1 className="py-4 text-white text-2xl font-normal">{title}</h1>
             </div>
             { components.map(component => {
                 return(
-                    <div key={component.name} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                    <div key={component.name} className="flex-grow px-4 py-6 border-b-4 border-red-400">
                         <h3 className="py-4"><strong>{component.nome}</strong></h3>
                         <ul>
                             <li><strong>Código: </strong>{component.codigo}</li>

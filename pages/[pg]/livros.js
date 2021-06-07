@@ -29,7 +29,7 @@ export default function Books({ books }) {
             <div className="flex flex-wrap justify-between">
                 { books.map(book => {
                     return(
-                        <div key={book.sequenciaProducao} className="flex-grow md:w-1/2 px-4 py-6 border-b-4 border-blue-400">
+                        <div key={book.sequenciaProducao} className="flex-grow md:w-1/2 px-4 py-6 border-b-4 border-red-400">
                             <h3 className="py-4"><strong>{book.nomeProducao}</strong></h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{book.anoProducao}</li>

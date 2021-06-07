@@ -50,13 +50,13 @@ export default function Staff({ staff }) {
     return(
         <BasicPage title="Equipe">
             <div className="w-full flex justify-center items-center py-2">
-                <h1 className="py-2 text-blue-900 text-2xl font-normal">Coordenação</h1>
+                <h1 className="py-2 text-red-900 text-2xl font-normal">Coordenação</h1>
             </div>
             <div className="flex flex-wrap justify-center">
                 {staff.coordination.map(person => (<Card key={person.id} person={person} />))}
             </div>
             <div className="w-full flex justify-center items-center py-2">
-                <h1 className="py-2 text-blue-900 text-2xl font-normal">Secretariado</h1>
+                <h1 className="py-2 text-red-900 text-2xl font-normal">Secretariado</h1>
             </div>
             <div className="flex flex-wrap justify-center">
                 {staff.notCoordination.map(person => (<Card key={person.id} person={person} />))}

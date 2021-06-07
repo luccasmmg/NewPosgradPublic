@@ -41,8 +41,8 @@ function Atendimento({ attendance }) {
     const liClasses = 'py-1'
     return(
             <div className="lg:px-24 py-4 px-2 sm:px-4">
-                <div className="border-blue-200 border-b-4">
-                    <h1 className="text-blue-900 text-2xl"><FontAwesomeIcon icon={faAddressBook} />{' '}Contato</h1>
+                <div className="border-red-200 border-b-4">
+                    <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faAddressBook} />{' '}Contato</h1>
                 </div>
                 <ul>
                     <li className={liClasses}><strong>Email: </strong>{attendance.email}</li>
@@ -62,8 +62,8 @@ function Classes({ classes }) {
     const [maxShow, setMaxShow] = useState(5)
     return(
         <div className="lg:px-24 py-4 px-2 max-w-sm sm:px-4">
-            <div className="border-blue-200 border-b-4">
-                <h1 className="text-blue-900 text-2xl"><FontAwesomeIcon icon={faTable} />{' '}Turmas</h1>
+            <div className="border-red-200 border-b-4">
+                <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faTable} />{' '}Turmas</h1>
             </div>
             <ol>
                 {classes.slice(0, maxShow).map(_class => <li className="py-1">{_class.nomeComponente}<strong>({_class.descricaoHorario})</strong></li>)}
@@ -76,7 +76,7 @@ function Classes({ classes }) {
 export default function PostGraduation({ pgData, classesData }) {
     return(
         <Layout>
-            <div className="flex justify-center flex-wrap bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
+            <div className="flex justify-center flex-wrap bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
                 <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>
                 <h1 className="lg:mx-36 pb-8 pt-4 text-2xl text-white font-bold">{pgData.description_small}</h1>
             </div>

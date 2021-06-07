@@ -29,7 +29,7 @@ export default function EventWorks({ eventWorks }) {
             <div className="flex flex-wrap justify-between">
                 { eventWorks.map(eventWork => {
                     return(
-                        <div key={eventWork.sequenciaProducao} className="md:w-1/2 px-4 py-6 border-b-4 border-blue-400">
+                        <div key={eventWork.sequenciaProducao} className="md:w-1/2 px-4 py-6 border-b-4 border-red-400">
                             <h3 className="py-4"><strong>{eventWork.nomeProducao}</strong></h3>
                             <ul>
                                 <li><strong>Ano produção: </strong>{eventWork.anoProducao}</li>

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -15,6 +15,14 @@ function NavLink({href, title, linkIcon}) {
                 <FontAwesomeIcon icon={linkIcon} />{' '}{title}
             </a>
         </Link>
+    )
+}
+
+function DividerTitle({ title }) {
+    return (
+        <span className="block px-4 py-2 mt-2 text-sm text-gray-700 font-bold rounded-lg dark-mode:bg-transparent md:mt-0">
+            {title}
+        </span>
     )
 }
 
@@ -83,11 +91,15 @@ export default function TopNav() {
                 </div>
                 <nav className={`${open ? 'flex' : 'hidden'} flex-col flex-grow pb-4 lg:pb-0 lg:flex lg:justify-end lg:flex-row`}>
                     <SubMenu key={1} title="Acadêmico" titleIcon={faGraduationCap}>
+                        <DividerTitle title="Ensino" />
                         <NavLink href='disciplinas' title='Disciplinas' linkIcon={faChalkboardTeacher}/>
                         <NavLink href='discentes' title='Discentes' linkIcon={faUserGraduate}/>
                         <NavLink href='professores' title='Docentes' linkIcon={faAppleAlt}/>
                         <NavLink href='turmas' title='Turmas' linkIcon={faTable}/>
+                        <hr></hr>
+                        <DividerTitle title="Pesquisa e Extensão" />
                         <NavLink href='dissertacoes' title='Dissertações' linkIcon={faAtlas}/>
+                        <NavLink href='convenios' title='Convênios' linkIcon={faHandshake}/>
                     </SubMenu>
                     <SubMenu key={2} title="Publicações" titleIcon={faBriefcase}>
                         <NavLink href='artigos' title='Artigos' linkIcon={faScroll}/>

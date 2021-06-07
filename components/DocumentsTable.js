@@ -7,7 +7,7 @@ export default function DocumentsTable({ documents, firstTH, secondTH }) {
     return(
         <>
             <table className="w-full my-8">
-                <thead className="w-full bg-blue-800 text-white">
+                <thead className="w-full bg-red-800 text-white">
                     <tr>
                         <th className={thCSS}>{firstTH}</th>
                         <th className={thCSS}>{secondTH}</th>

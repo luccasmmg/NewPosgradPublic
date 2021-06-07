@@ -32,7 +32,7 @@ export default function News({ newsSigaa }) {
             <div className="flex flex-wrap justify-between">
                 { newsSigaa.slice(0, limit).map(news => {
                     return(
-                        <div key={news.index} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-blue-400">
+                        <div key={news.index} className="my-2 w-full flex-grow shadow px-4 py-6 border-b-4 border-red-400">
                             <h4 className="text-gray-600">{news.date}</h4>
                             <h2 className="text-lg text-gray-700 font-medium hover:underline">{news.title}</h2>
                             <Link href={`/${pg}/noticias/${news.index}`}><a>Leia mais...</a></Link>
@@ -40,7 +40,7 @@ export default function News({ newsSigaa }) {
                     )
                 })}
             </div>
-            <button onClick={() => setLimit(limit + 10)}type="button" className="w-full my-2 focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-md border border-blue-600 hover:bg-blue-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>
+            <button onClick={() => setLimit(limit + 10)}type="button" className="w-full my-2 focus:outline-none text-red-600 text-sm py-2.5 px-5 rounded-md border border-red-600 hover:bg-red-50"><FontAwesomeIcon icon={faArrowDown} />{' '}Carregar mais</button>
         </BasicPage>
     )
 }

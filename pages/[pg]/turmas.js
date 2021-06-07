@@ -32,7 +32,7 @@ function ClassesGroup({ classes }) {
     return(
         <>
             <table className="hidden md:table my-8 rounded-lg w-full table-auto">
-                <thead className="rounded-t-lg bg-blue-800 text-white">
+                <thead className="rounded-t-lg bg-red-800 text-white">
                     <tr>
                         <th className={thCSS}>Código</th>
                         <th className={thCSS}>Nome</th>
@@ -62,7 +62,7 @@ function ClassList({ classes }) {
             { classes.map(_class => {
                 const parsedDocentes = _class.docentes.map(docente => mapKeys(docente, (v, k) => camelCase(k)))
                 return(
-                    <div key={_class.idTurma} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                    <div key={_class.idTurma} className="flex-grow px-4 py-6 border-b-4 border-red-400">
                         <h3 className="py-4"><strong>{_class.nomeComponente}</strong></h3>
                         <ul>
                             <li><strong>Código: </strong>{_class.codigoComponente}</li>
@@ -91,7 +91,7 @@ function SearchForm({ updateClasses }) {
                 <div class="p-6 flex justify-center flex-wrap">
                     <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Pesquisar outros anos</label>
                     <input value={year} onChange={e => setYears(e.target.value)} type="number" name="ano" id="ano" placeholder="2021" required class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
-                    <button type="button" onClick={() => updateClasses(year)}class="w-full my-2 focus:outline-none text-blue-600 text-sm py-2.5 px-5 rounded-md border border-blue-600 hover:bg-blue-50"><FontAwesomeIcon icon={faSearch} />{' '}Pesquisar</button>
+                    <button type="button" onClick={() => updateClasses(year)}class="w-full my-2 focus:outline-none text-red-600 text-sm py-2.5 px-5 rounded-md border border-red-600 hover:bg-blue-50"><FontAwesomeIcon icon={faSearch} />{' '}Pesquisar</button>
                 </div>
             </form>
         </div>

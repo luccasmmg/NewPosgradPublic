@@ -46,7 +46,7 @@ function StudentGroup({ students }) {
     return(
         <>
             <table className="hidden sm:table w-full my-8">
-                <thead className="w-full bg-blue-800 text-white">
+                <thead className="w-full bg-red-800 text-white">
                     <tr>
                         <th className={thCSS}>Nome</th>
                         <th className={thCSS}>Orientador</th>
@@ -72,7 +72,7 @@ function StudentsList({ students }) {
         <div className="sm:hidden flex-wrap justify-between">
             { students.map(student => {
                 return(
-                    <div key={student.matricula} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                    <div key={student.matricula} className="flex-grow px-4 py-6 border-b-4 border-red-400">
                         <h3 className="py-4"><strong>{student.nomeDiscente}</strong></h3>
                         <ul>
                             <li><strong>Matrícula: </strong>{student.matricula}</li>

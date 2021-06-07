@@ -35,7 +35,7 @@ function ProfessorsGroup({ professors }) {
     return(
         <>
             <table className="hidden md:table my-8 rounded-lg w-full table-auto">
-                <thead className="rounded-t-lg bg-blue-800 text-white">
+                <thead className="rounded-t-lg bg-red-800 text-white">
                     <tr>
                         <th className={thCSS}>Nome</th>
                         <th className={thCSS}>Vínculo</th>
@@ -68,7 +68,7 @@ function ProfessorsList({ professors }) {
         <div className="md:hidden flex-wrap justify-between">
             { professors.map(professor => {
                 return(
-                    <div key={professor.name} className="flex-grow px-4 py-6 border-b-4 border-blue-400">
+                    <div key={professor.name} className="flex-grow px-4 py-6 border-b-4 border-red-400">
                         <h3 className="py-4"><strong>{professor.name}</strong></h3>
                         <ul>
                             <li><strong>Vínculo: </strong>{professor.level}</li>
