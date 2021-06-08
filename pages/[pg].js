@@ -1,11 +1,11 @@
-import { faAddressBook, faTable } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook, faHandshake, faTable } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useRouter } from 'next/router'
 import Layout from '../components/Layout'
 import mapKeys from 'lodash/mapKeys'
 import camelCase from 'lodash/camelCase'
 import { useState } from 'react'
 import fetchRetry from '../lib/fetchRetry'
+import Image from 'next/image'
 
 export async function getStaticPaths() {
     const res = await fetch('http://localhost:8000/api/v1/publico/')
@@ -29,10 +29,14 @@ export async function getStaticProps({ params }) {
 
     const resClasses = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`, 10)
     const classesData = await resClasses.json()
+
+    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/convenios`)
+    const covenants = await res.json()
     return {
         props: {
             pgData,
-            classesData: classesData.map(classData => mapKeys(classData, (v, k) => camelCase(k)))
+            classesData: classesData.map(classData => mapKeys(classData, (v, k) => camelCase(k))),
+            covenants: covenants.filter(covenant => covenant.finished === false)
         }
     }
 }
@@ -66,14 +70,14 @@ function Classes({ classes }) {
                 <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faTable} />{' '}Turmas</h1>
             </div>
             <ol>
-                {classes.slice(0, maxShow).map(_class => <li className="py-1">{_class.nomeComponente}<strong>({_class.descricaoHorario})</strong></li>)}
+                {classes.slice(0, maxShow).map(_class => <li key={_class.idTurma} className="py-1">{_class.nomeComponente}<strong>({_class.descricaoHorario})</strong></li>)}
                 {maxShow == 5 ? <li><a onClick={() => setMaxShow(classes.length)}>Mostrar mais...</a></li> : <li><a onClick={() => setMaxShow(5)}>Mostrar menos...</a></li> }
             </ol>
         </div>
     )
 }
 
-export default function PostGraduation({ pgData, classesData }) {
+export default function PostGraduation({ pgData, classesData, covenants }) {
     return(
         <Layout>
             <div className="flex justify-center flex-wrap bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
@@ -84,6 +88,16 @@ export default function PostGraduation({ pgData, classesData }) {
                 <div className="flex flex-wrap p-4 bg-white">
                     <Atendimento attendance={pgData.attendance} />
                     <Classes classes={classesData} />
+                </div>
+            </div>
+            <div className="flex py-2 w-full justify-center">
+                <div className="flex w-full flex-wrap justify-center space-around bg-white">
+                    <div className="flex w-full justify-center pt-6">
+                        <h2 className="text-3xl text-red-800"><FontAwesomeIcon icon={faHandshake} />{' '}Convênios</h2>
+                    </div>
+                    <div className="flex w-4/5 py-4 justify-center flex-wrap content-between bg-white">
+                        {covenants.map(covenant => <Image width={200} height={200} alt={covenant.name} src={covenant.logo_file} />)}
+                    </div>
                 </div>
             </div>
         </Layout>

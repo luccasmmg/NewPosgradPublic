@@ -28,7 +28,7 @@ export default function News({ newsSigaa }) {
     const {pg} = useRouter().query
     console.log(newsSigaa.length)
     return(
-        <BasicPage title="Notíciass">
+        <BasicPage title="Notícias">
             <div className="flex flex-wrap justify-between">
                 { newsSigaa.slice(0, limit).map(news => {
                     return(

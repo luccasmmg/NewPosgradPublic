@@ -42,6 +42,7 @@ export default function Covenants({ covenants }) {
     return(
         <BasicPage title="CONVÊNIOS">
             <ListOfCovenants covenants={covenants.finished} title="Finalizados" />
+            <ListOfCovenants covenants={covenants.unfinished} title="Finalizados" />
         </BasicPage>
     )
 }

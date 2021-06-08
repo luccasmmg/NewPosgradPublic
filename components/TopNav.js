@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake, faChartLine } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -99,18 +99,21 @@ export default function TopNav() {
                         <hr></hr>
                         <DividerTitle title="Pesquisa e Extensão" />
                         <NavLink href='dissertacoes' title='Dissertações' linkIcon={faAtlas}/>
-                        <NavLink href='convenios' title='Convênios' linkIcon={faHandshake}/>
+                        <hr></hr>
+                        <DividerTitle title="Programa" />
+                        <NavLink href='impacto' title='Impacto' linkIcon={faChartLine}/>
                     </SubMenu>
                     <SubMenu key={2} title="Publicações" titleIcon={faBriefcase}>
                         <NavLink href='artigos' title='Artigos' linkIcon={faScroll}/>
                         <NavLink href='livros' title='Livros' linkIcon={faBook}/>
                         <NavLink href='capitulos' title='Capitulos' linkIcon={faBookOpen}/>
                         <NavLink href='trabalhos' title='Apresentações Trabalhos' linkIcon={faChalkboardTeacher}/>
-                        <NavLink href='repositorio' title={`Repositório ${pg}`} linkIcon={faAtlas}/>
+                        <NavLink href='repositorio' title={`Repositório ${pg.toUpperCase()}`} linkIcon={faAtlas}/>
                     </SubMenu>
                     <SubMenu key={3} title="Coordenação" titleIcon={faLeaf}>
                         <NavLink href='equipe' title='Equipe' linkIcon={faUsers}/>
                         <NavLink href='noticias' title='Notícias' linkIcon={faNewspaper}/>
+                        <NavLink href='convenios' title='Convênios' linkIcon={faHandshake}/>
                     </SubMenu>
                     <SubMenu key={4} title="Documentos" titleIcon={faFolderOpen}>
                         <NavLink href='documentos/resolucoes' title='Resoluções' linkIcon={faFolder}/>
