@@ -26,7 +26,6 @@ export async function getStaticProps({ params }) {
 export default function News({ newsSigaa }) {
     const [limit, setLimit] = useState(10)
     const {pg} = useRouter().query
-    console.log(newsSigaa.length)
     return(
         <BasicPage title="Notícias">
             <div className="flex flex-wrap justify-between">

@@ -1,4 +1,4 @@
-import { faAddressBook, faCalendar, faFileAlt, faHandshake, faHome, faNewspaper, faTable } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook, faCalendar, faClipboardCheck, faFileAlt, faHandshake, faHome, faNewspaper, faTable } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/Layout'
 import mapKeys from 'lodash/mapKeys'
@@ -28,6 +28,10 @@ export async function getStaticProps({ params }) {
     const resPg = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}`)
     const pgData = await resPg.json()
 
+    const resExaminingBoards = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/bancas_sigaa/`, 5)
+    const examiningBoards = await resExaminingBoards.json()
+    const parsedExaminingBoards = examiningBoards.map(examiningBoard => mapKeys(examiningBoard, (v, k) => camelCase(k))).filter(examiningBoard => examiningBoard.titulo)
+
     const resClasses = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`, 10)
     const classesData = await resClasses.json()
 
@@ -39,13 +43,15 @@ export async function getStaticProps({ params }) {
 
     const resEvents = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/eventos`)
     const events = await resEvents.json()
+
     return {
         props: {
             pgData,
             classesData: classesData.map(classData => mapKeys(classData, (v, k) => camelCase(k))),
             covenants: covenants.filter(covenant => covenant.finished === false),
             newsList: news,
-            events
+            events,
+            examiningBoards: parsedExaminingBoards
         }
     }
 }
@@ -126,6 +132,38 @@ function Event({ event }) {
     )
 }
 
+function ExaminingBoards({ examiningBoards }) {
+    return (
+        <div className="py-4 max-w-sm sm:px-4">
+            <div className="border-red-200 w-full my-2 border-b-4">
+                <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faClipboardCheck} />{' '}Defesas de Tese</h1>
+            </div>
+        <table className="schedule-table">
+        {examiningBoards.map(examiningBoard => {
+            const date = new Date(examiningBoard.dataDefesa);
+            return(
+                <tr key={examiningBoard.idBancaPosGraduacao} className="schedule-container">
+                    <td className="schedule-container-date">
+                        <ul>
+                            <li className="schedule-date-day">{date.getDay()}</li>
+                            <li className="schedule-date-month">{date.toLocaleString('default', { month: 'long'})}</li>
+                            <li className="schedule-date-year">{date.getFullYear()}</li>
+                        </ul>
+                    </td>
+                    <td className="schedule-container-info">
+                        <h6 className="text-sm text-red-900">{ examiningBoard.titulo }</h6>
+                        <p className="text-sm">
+                            {examiningBoard.nomeDiscente}
+                        </p>
+                    </td>
+                </tr>
+            )
+        })}
+        </table>
+        </div>
+    )
+}
+
 function Events({ events }) {
     const eventsFiltered = events.filter(event => !event.title.toLowerCase().includes("selection"))
     return(
@@ -167,7 +205,7 @@ function About({ about }) {
     )
 }
 
-export default function PostGraduation({ pgData, classesData, newsList, covenants, events }) {
+export default function PostGraduation({ pgData, classesData, newsList, covenants, events, examiningBoards }) {
     return(
         <Layout>
             <div className="flex justify-center flex-wrap bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
@@ -179,11 +217,12 @@ export default function PostGraduation({ pgData, classesData, newsList, covenant
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 p-4 bg-white">
                         <Atendimento attendance={pgData.attendance} pg={pgData.initials} />
                         <div>
+                            <Selections events={events} />
                             <Events events={events} />
                             <News newsList={newsList} pg={pgData.initials} />
                         </div>
                         <div>
-                            <Selections events={events} />
+                            <ExaminingBoards examiningBoards={examiningBoards} />
                             <Classes classes={classesData} />
                         </div>
                     </div>

@@ -39,7 +39,6 @@ function ListOfCovenants({ covenants, title }) {
 }
 
 export default function Covenants({ covenants }) {
-    console.log(covenants)
     return(
         <BasicPage title="CONVÊNIOS">
             { covenants.finished && 

@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { Transition } from '@headlessui/react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake, faChartLine } from '@fortawesome/free-solid-svg-icons'
+import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake, faChartLine, faClipboardCheck } from '@fortawesome/free-solid-svg-icons'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -99,6 +99,7 @@ export default function TopNav() {
                         <hr></hr>
                         <DividerTitle title="Pesquisa e Extensão" />
                         <NavLink href='dissertacoes' title='Dissertações' linkIcon={faAtlas}/>
+                        <NavLink href='defesas' title='Defesas de Tese' linkIcon={faClipboardCheck}/>
                         <hr></hr>
                         <DividerTitle title="Programa" />
                         <NavLink href='impacto' title='Impacto' linkIcon={faChartLine}/>
