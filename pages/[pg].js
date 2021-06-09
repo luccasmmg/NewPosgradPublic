@@ -1,4 +1,4 @@
-import { faAddressBook, faCalendar, faFileAlt, faHandshake, faNewspaper, faTable } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook, faCalendar, faFileAlt, faHandshake, faHome, faNewspaper, faTable } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/Layout'
 import mapKeys from 'lodash/mapKeys'
@@ -155,6 +155,18 @@ function Selections({ events }) {
     )
 }
 
+function About({ about }) {
+    return(
+        <>
+            <hr></hr>
+            <div className="flex w-full justify-center py-4">
+                <h2 className="text-3xl text-red-800 border-b-4"><FontAwesomeIcon icon={faHome} />{' '}Sobre o Programa</h2>
+            </div>
+            <div className="py-6" dangerouslySetInnerHTML={{ __html: about }} />
+        </>
+    )
+}
+
 export default function PostGraduation({ pgData, classesData, newsList, covenants, events }) {
     return(
         <Layout>
@@ -162,23 +174,30 @@ export default function PostGraduation({ pgData, classesData, newsList, covenant
                 <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>
                 <h1 className="lg:mx-36 pb-8 pt-4 text-2xl text-white font-bold">{pgData.description_small}</h1>
             </div>
-            <div className="flex my-4 justify-center">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 p-4 bg-white">
-                    <Atendimento attendance={pgData.attendance} pg={pgData.initials} />
-                    <div>
-                        <Events events={events} />
-                        <News newsList={newsList} pg={pgData.initials} />
+            <div className="flex justify-center">
+                <div className="flex my-4 justify-center flex-col bg-white max-w-screen-xl">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 p-4 bg-white">
+                        <Atendimento attendance={pgData.attendance} pg={pgData.initials} />
+                        <div>
+                            <Events events={events} />
+                            <News newsList={newsList} pg={pgData.initials} />
+                        </div>
+                        <div>
+                            <Selections events={events} />
+                            <Classes classes={classesData} />
+                        </div>
                     </div>
-                    <div>
-                        <Selections events={events} />
-                        <Classes classes={classesData} />
-                    </div>
+                    {pgData.attendance.about &&
+                        <div className="px-8">
+                            <About className="w-full" about={pgData.attendance.about} />
+                        </div>
+                    }
                 </div>
             </div>
             <div className="flex py-2 w-full justify-center">
                 <div className="flex w-full flex-wrap justify-center space-around bg-white">
                     <div className="flex w-full justify-center pt-6">
-                        <h2 className="text-3xl text-red-800"><FontAwesomeIcon icon={faHandshake} />{' '}Convênios</h2>
+                        <h2 className="text-3xl text-red-800 border-b-4"><FontAwesomeIcon icon={faHandshake} />{' '}Convênios</h2>
                     </div>
                     <div className="flex w-4/5 py-4 justify-center flex-wrap content-between bg-white">
                         {covenants.map(covenant => <Image width={200} height={200} alt={covenant.name} src={covenant.logo_file} />)}
