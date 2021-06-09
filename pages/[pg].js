@@ -1,4 +1,4 @@
-import { faAddressBook, faHandshake, faTable } from '@fortawesome/free-solid-svg-icons'
+import { faAddressBook, faCalendar, faFileAlt, faHandshake, faNewspaper, faTable } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Layout from '../components/Layout'
 import mapKeys from 'lodash/mapKeys'
@@ -6,6 +6,7 @@ import camelCase from 'lodash/camelCase'
 import { useState } from 'react'
 import fetchRetry from '../lib/fetchRetry'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export async function getStaticPaths() {
     const res = await fetch('http://localhost:8000/api/v1/publico/')
@@ -30,33 +31,45 @@ export async function getStaticProps({ params }) {
     const resClasses = await fetchRetry(`http://localhost:8000/api/v1/publico/${params.pg}/turmas`, 10)
     const classesData = await resClasses.json()
 
-    const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/convenios`)
-    const covenants = await res.json()
+    const resCovenants = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/convenios`)
+    const covenants = await resCovenants.json()
+
+    const resNews = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/lista_noticias_sigaa?limit=5`)
+    const news = await resNews.json()
+
+    const resEvents = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/eventos`)
+    const events = await resEvents.json()
     return {
         props: {
             pgData,
             classesData: classesData.map(classData => mapKeys(classData, (v, k) => camelCase(k))),
-            covenants: covenants.filter(covenant => covenant.finished === false)
+            covenants: covenants.filter(covenant => covenant.finished === false),
+            newsList: news,
+            events
         }
     }
 }
 
-function Atendimento({ attendance }) {
+function Atendimento({ attendance, pg }) {
     const liClasses = 'py-1'
     return(
-            <div className="lg:px-24 py-4 px-2 sm:px-4">
-                <div className="border-red-200 border-b-4">
+            <div className="py-4 w-full sm:px-4">
+                <div className="border-red-200 w-full border-b-4">
                     <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faAddressBook} />{' '}Contato</h1>
+                </div>
+                <div className="w-full flex justify-center">
+                    <Image src={`/logo_${pg.toLowerCase()}.png`} width={300} height={300} />
                 </div>
                 <ul>
                     <li className={liClasses}><strong>Email: </strong>{attendance.email}</li>
                     <li className={liClasses}><strong>Localização: </strong>{attendance.location}</li>
                     <li className={liClasses}><strong>Horários: </strong>{attendance.schedule}</li>
-                    <li className={liClasses}><strong>Telefones: </strong>
+                    <li className={liClasses}>
                         <ol>
-                            {attendance.phones.map(phone => <li key={phone.number}>{phone.number} <strong>({phone.type === 'fixed' ? 'Fixo' : 'Celular'})</strong></li>)}
+                            {attendance.phones.map(phone => <li key={phone.number}><strong>Telefone: </strong>{phone.number}({phone.type === 'fixed' ? 'Fixo' : 'Celular'})</li>)}
                         </ol>
                     </li>
+                    <iframe className="w-full h-96" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1403.2976292049614!2d-35.19903981944597!3d-5.837988314568564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b2ff86c49f50e1%3A0xc8ff610d7906202f!2sCCSA%20-%20Centro%20de%20Ci%C3%AAncias%20Sociais%20Aplicadas!5e0!3m2!1spt-BR!2sbr!4v1623183899283!5m2!1spt-BR!2sbr"></iframe>
                 </ul>
             </div>
     )
@@ -65,19 +78,84 @@ function Atendimento({ attendance }) {
 function Classes({ classes }) {
     const [maxShow, setMaxShow] = useState(5)
     return(
-        <div className="lg:px-24 py-4 px-2 max-w-sm sm:px-4">
-            <div className="border-red-200 border-b-4">
+        <div className="py-4 max-w-sm sm:px-4">
+            <div className="border-red-200 w-full border-b-4">
                 <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faTable} />{' '}Turmas</h1>
             </div>
             <ol>
-                {classes.slice(0, maxShow).map(_class => <li key={_class.idTurma} className="py-1">{_class.nomeComponente}<strong>({_class.descricaoHorario})</strong></li>)}
+                {classes.slice(0, maxShow).map(_class => <li key={_class.idTurma} className="py-1">{_class.nomeComponente}<strong>{' '}({_class.descricaoHorario})</strong></li>)}
                 {maxShow == 5 ? <li><a onClick={() => setMaxShow(classes.length)}>Mostrar mais...</a></li> : <li><a onClick={() => setMaxShow(5)}>Mostrar menos...</a></li> }
             </ol>
         </div>
     )
 }
 
-export default function PostGraduation({ pgData, classesData, covenants }) {
+function News({ newsList, pg }) {
+    return(
+        <div className="py-4 max-w-sm sm:px-4">
+            <div className="border-red-200 w-full border-b-4">
+                <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faNewspaper} />{' '}Noticias</h1>
+            </div>
+            <ol>
+                {newsList.map(news => <li key={news.index} className="py-1"><Link href={`/${pg}/noticias/${news.index}`}>{news.title}</Link><strong>({news.date})</strong></li>)}
+            </ol>
+            <Link href={`/${pg}/noticias`}><a className="text-red-400">Clique aqui para ver o resto das notícias</a></Link>
+        </div>
+    )
+}
+
+function Event({ event }) {
+    const initialDate = new Date(event.initial_date);
+    const finalDate = new Date(event.final_date);
+    return (
+        <tr key={event.id} className="schedule-container">
+            <td className="schedule-container-date">
+                <ul>
+                    <li className="schedule-date-day">{initialDate.getDay()}</li>
+                    <li className="schedule-date-month">{initialDate.toLocaleString('default', { month: 'long'})}</li>
+                    <li className="schedule-date-year">{initialDate.getFullYear()}</li>
+                </ul>
+            </td>
+            <td className="schedule-container-info">
+                <h4 className="text-red-900">{ event.title }</h4>
+                <p>
+                    <a href={ event.link }>Mais informações</a>
+                </p>
+            </td>
+        </tr>
+    )
+}
+
+function Events({ events }) {
+    const eventsFiltered = events.filter(event => !event.title.toLowerCase().includes("selection"))
+    return(
+        <div className="py-4 max-w-sm sm:px-4">
+            <div className="border-red-200 w-full border-b-4">
+                <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faCalendar} />{' '}Eventos</h1>
+            </div>
+            <p>Eventos anunciados pelo programa</p>
+            <table className="schedule-table">
+            {eventsFiltered.map(event => <Event event={event} />)}
+            </table>
+        </div>
+    )
+}
+
+function Selections({ events }) {
+    const selections = events.filter(event => event.title.toLowerCase().includes("selection"))
+    return(
+        <div className="py-4 max-w-sm sm:px-4">
+            <div className="border-red-200 w-full border-b-4">
+                <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faFileAlt} />{' '}Seleções</h1>
+            </div>
+            <table className="schedule-table">
+            { selections.length > 0 ? selections.map(selection => <Event event={selection} />) : <p>(Sem eventos agendados no momento.)</p>}
+            </table>
+        </div>
+    )
+}
+
+export default function PostGraduation({ pgData, classesData, newsList, covenants, events }) {
     return(
         <Layout>
             <div className="flex justify-center flex-wrap bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
@@ -85,9 +163,16 @@ export default function PostGraduation({ pgData, classesData, covenants }) {
                 <h1 className="lg:mx-36 pb-8 pt-4 text-2xl text-white font-bold">{pgData.description_small}</h1>
             </div>
             <div className="flex my-4 justify-center">
-                <div className="flex flex-wrap p-4 bg-white">
-                    <Atendimento attendance={pgData.attendance} />
-                    <Classes classes={classesData} />
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 p-4 bg-white">
+                    <Atendimento attendance={pgData.attendance} pg={pgData.initials} />
+                    <div>
+                        <Events events={events} />
+                        <News newsList={newsList} pg={pgData.initials} />
+                    </div>
+                    <div>
+                        <Selections events={events} />
+                        <Classes classes={classesData} />
+                    </div>
                 </div>
             </div>
             <div className="flex py-2 w-full justify-center">

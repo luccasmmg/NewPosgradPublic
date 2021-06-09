@@ -30,7 +30,7 @@ function ListOfCovenants({ covenants, title }) {
                     <div key={covenant.id} className="px-4 py-2 border-b-4 border-red-400">
                         <h3 className="py-2"><strong>Instituição: </strong>{covenant.initials} - {covenant.name}</h3>
                         <h4><strong>Objeto: </strong></h4>
-                        <p>{covenant.object}</p>
+                        <div dangerouslySetInnerHTML={{ __html: covenant.object }} />
                     </div>
                 )
             })}
@@ -39,10 +39,15 @@ function ListOfCovenants({ covenants, title }) {
 }
 
 export default function Covenants({ covenants }) {
+    console.log(covenants)
     return(
         <BasicPage title="CONVÊNIOS">
+            { covenants.finished && 
             <ListOfCovenants covenants={covenants.finished} title="Finalizados" />
+            }
+            { covenants.unfinished &&
             <ListOfCovenants covenants={covenants.unfinished} title="Finalizados" />
+            }
         </BasicPage>
     )
 }
