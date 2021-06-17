@@ -1,82 +1,109 @@
 import Head from 'next/head'
+import Footer from '../components/Footer'
+import TopNavHome from '../components/TopNavHome'
+import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
+    <>
+    <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
+    </Head>
+    <header className="bg-gradient-to-r from-red-600 via-red-500 to-red-400"><TopNavHome></TopNavHome></header>
+      <main className="flex flex-col items-center justify-center flex-1 px-20 py-4 bg-white text-center">
         <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
+          Bem vindo ao portal das pós graduações do{' '}
+          <a className="text-red-600" href="https://ccsa.ufrn.br">
+            CCSA!
           </a>
         </h1>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
-
         <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
+          <Link href="/ppga/">
           <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-800 focus:text-blue-800"
           >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
+            <h3 className="text-2xl font-bold text-blue-700">PPGA &rarr;</h3>
             <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
+              Pós Graduação em Administração
             </p>
           </a>
-
+          </Link>
+          <Link href="/ppgcc/">
           <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-purple-800 focus:text-purple-800"
           >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
+            <h3 className="text-2xl font-bold text-purple-600">PPGCC &rarr;</h3>
             <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
+              Pós Graduação em Ciências Contábeis
             </p>
           </a>
-
+          </Link>
+          <Link href="/ppgd/">
           <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-red-800 focus:text-red-800"
           >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
+            <h3 className="text-2xl font-bold text-red-600">PPGD &rarr;</h3>
             <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
+              Pós Graduação em Direito
             </p>
           </a>
-
+          </Link>
+          <Link href="/ppgeco/">
           <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-900 focus:text-blue-900"
           >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
+            <h3 className="text-2xl font-bold text-blue-800">PPGECO &rarr;</h3>
             <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              Pós Graduação em Economia
             </p>
           </a>
+          </Link>
+          <Link href="/ppgic/">
+          <a
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-purple-900 focus:text-purple-900"
+          >
+            <h3 className="text-2xl font-bold text-purple-800">PPGIC &rarr;</h3>
+            <p className="mt-4 text-xl">
+              Pós Graduação Gestão da Informação e do Conhecimento
+            </p>
+          </a>
+          </Link>
+          <Link href="/ppgp/">
+          <a
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-800 focus:text-blue-800"
+          >
+            <h3 className="text-2xl font-bold text-blue-600">PPGP &rarr;</h3>
+            <p className="mt-4 text-xl">
+              Pós Graduação em Gestão Pública
+            </p>
+          </a>
+          </Link>
+          <Link href="/ppgss/">
+          <a
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-green-800 focus:text-green-800"
+          >
+            <h3 className="text-2xl font-bold text-green-600">PPGSS &rarr;</h3>
+            <p className="mt-4 text-xl">
+              Pós Graduação em Serviço Social
+            </p>
+          </a>
+          </Link>
+          <Link href="/ppgtur/">
+          <a
+            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-700 focus:text-blue-700"
+          >
+            <h3 className="text-2xl font-bold text-blue-400">PPGTUR &rarr;</h3>
+            <p className="mt-4 text-xl">
+              Pós Graduação em Turismo
+            </p>
+          </a>
+          </Link>
         </div>
       </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
-      </footer>
-    </div>
+    <footer className="bg-gradient-to-r from-red-600 via-red-500 to-red-400 border-t-4 border-red-600 footer relative"><Footer></Footer></footer>
+    </>
   )
 }

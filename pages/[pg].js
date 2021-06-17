@@ -139,26 +139,28 @@ function ExaminingBoards({ examiningBoards }) {
                 <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faClipboardCheck} />{' '}Defesas de Tese</h1>
             </div>
         <table className="schedule-table">
-        {examiningBoards.map(examiningBoard => {
-            const date = new Date(examiningBoard.dataDefesa);
-            return(
-                <tr key={examiningBoard.idBancaPosGraduacao} className="schedule-container">
-                    <td className="schedule-container-date">
-                        <ul>
-                            <li className="schedule-date-day">{date.getDay()}</li>
-                            <li className="schedule-date-month">{date.toLocaleString('default', { month: 'long'})}</li>
-                            <li className="schedule-date-year">{date.getFullYear()}</li>
-                        </ul>
-                    </td>
-                    <td className="schedule-container-info">
-                        <h6 className="text-sm text-red-900">{ examiningBoard.titulo }</h6>
-                        <p className="text-sm">
-                            {examiningBoard.nomeDiscente}
-                        </p>
-                    </td>
-                </tr>
-            )
-        })}
+            <tbody>
+                {examiningBoards.map(examiningBoard => {
+                    const date = new Date(examiningBoard.dataDefesa);
+                    return(
+                        <tr key={examiningBoard.idBancaPosGraduacao} className="schedule-container">
+                            <td className="schedule-container-date">
+                                <ul>
+                                    <li className="schedule-date-day">{date.getDay()}</li>
+                                    <li className="schedule-date-month">{date.toLocaleString('default', { month: 'long'})}</li>
+                                    <li className="schedule-date-year">{date.getFullYear()}</li>
+                                </ul>
+                            </td>
+                            <td className="schedule-container-info">
+                                <h6 className="text-sm text-red-900">{ examiningBoard.titulo }</h6>
+                                <p className="text-sm">
+                                    {examiningBoard.nomeDiscente}
+                                </p>
+                            </td>
+                        </tr>
+                    )
+                })}
+            </tbody>
         </table>
         </div>
     )
@@ -173,7 +175,9 @@ function Events({ events }) {
             </div>
             <p>Eventos anunciados pelo programa</p>
             <table className="schedule-table">
-            {eventsFiltered.map(event => <Event event={event} />)}
+                <tbody>
+                    {eventsFiltered.map(event => <Event key={event.id} event={event} />)}
+                </tbody>
             </table>
         </div>
     )
@@ -187,7 +191,9 @@ function Selections({ events }) {
                 <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faFileAlt} />{' '}Seleções</h1>
             </div>
             <table className="schedule-table">
-            { selections.length > 0 ? selections.map(selection => <Event event={selection} />) : <p>(Sem eventos agendados no momento.)</p>}
+                <tboody>
+                    { selections.length > 0 ? selections.map(selection => <Event key={selection.id} event={selection} />) : <tr><td>(Sem eventos agendados no momento.)</td></tr>}
+                </tboody>
             </table>
         </div>
     )
@@ -208,8 +214,10 @@ function About({ about }) {
 export default function PostGraduation({ pgData, classesData, newsList, covenants, events, examiningBoards }) {
     return(
         <Layout>
-            <div className="flex justify-center flex-wrap bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
-                <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>
+            <div className="flex justify-center flex-wrap content-center bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
+                <div className="flex justify-center w-full items-center">
+                    <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>
+                </div>
                 <h1 className="lg:mx-36 pb-8 pt-4 text-2xl text-white font-bold">{pgData.description_small}</h1>
             </div>
             <div className="flex justify-center">
@@ -239,7 +247,7 @@ export default function PostGraduation({ pgData, classesData, newsList, covenant
                         <h2 className="text-3xl text-red-800 border-b-4"><FontAwesomeIcon icon={faHandshake} />{' '}Convênios</h2>
                     </div>
                     <div className="flex w-4/5 py-4 justify-center flex-wrap content-between bg-white">
-                        {covenants.map(covenant => <Image width={200} height={200} alt={covenant.name} src={covenant.logo_file} />)}
+                        {covenants.map(covenant => <Image key={covenant.id} width={200} height={200} alt={covenant.name} src={covenant.logo_file} />)}
                     </div>
                 </div>
             </div>
