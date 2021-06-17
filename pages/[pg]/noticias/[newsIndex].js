@@ -1,3 +1,5 @@
+import { faDownload } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import BasicPage from '../../../components/BasicPage'
 
 import getPgs from '../../../lib/getPgs'
@@ -34,6 +36,9 @@ export default function News({ news }) {
                     <h1 className="text-3xl py-2 text-gray-900">{news.title}</h1>
                     <h4 className="text-gray-600">{news.date}</h4>
                     <div dangerouslySetInnerHTML={{ __html: news.body }} />
+                    { news.url &&
+                        <a href={news.url}><h5 className="py-2"><FontAwesomeIcon icon={faDownload} />{' '}Baixar arquivo</h5></a>
+                    }
                 </div>
             </div>
         </BasicPage>
