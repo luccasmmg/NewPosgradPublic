@@ -13,9 +13,9 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const resPg = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}`)
     const pg = await resPg.json()
-
     const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/${pg.courses[0].id}/repositorio_institucional`)
-    const initialPublications = await res.json()
+    let initialPublications = []
+    try { initialPublications = await res.json() } catch { initialPublications = [] }
     return {
         props: {
             initialPublications,
