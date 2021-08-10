@@ -7,6 +7,7 @@ import { faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import BasicPage from '../../components/BasicPage'
+import BASE_URL from '../api/config'
 
 export async function getStaticPaths() {
     return getPgs()
@@ -33,7 +34,7 @@ export default function ExaminingBoards({ initialExaminingBoards, pg }) {
 
     const getExaminingBoards = async function() {
         setLoading(true)
-        const resExaminingBoards = await fetchRetry(`http://localhost:8000/api/v1/publico/${pg}/bancas_sigaa/?page=${page}`, 5)
+        const resExaminingBoards = await fetchRetry(`${BASE_URL}/api/v1/publico/${pg}/bancas_sigaa/?page=${page}`, 5)
         const examiningBoardsToPush = await resExaminingBoards.json()
         const parsedExaminingBoardsToPush = examiningBoardsToPush.map(examiningBoard => mapKeys(examiningBoard, (v, k) => camelCase(k))).filter(examiningBoard => examiningBoard.titulo).filter(examiningBoard => examiningBoard.titulo && examiningBoard.titulo.length < 500)
         setPage(page + 1)

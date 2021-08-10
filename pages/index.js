@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
     <Head>
-        <title>Create Next App</title>
+        <title>Pós Graduações</title>
         <link rel="icon" href="/favicon.ico" />
     </Head>
     <header className="bg-gradient-to-r from-red-600 via-red-500 to-red-400"><TopNavHome></TopNavHome></header>

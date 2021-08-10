@@ -7,6 +7,7 @@ import Image from 'next/image'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase,  faBook, faBookOpen, faFile, faUserGraduate, faChalkboardTeacher, faGraduationCap, faAppleAlt, faTable, faLeaf, faAtlas, faNewspaper, faUsers, faScroll, faFolderOpen, faFolder, faHandshake, faChartLine, faClipboardCheck, faCalendar, faPlane, faSearch, faRandom } from '@fortawesome/free-solid-svg-icons'
+import BASE_URL from '../pages/api/config'
 
 function NavLink({href, title, linkIcon}) {
     const {pg} = useRouter().query
@@ -34,12 +35,12 @@ export default function TopNav() {
 
     useEffect(() => {    
         async function getPgs() {
-            const res = await fetch('http://localhost:8000/api/v1/publico/')
+            const res = await fetch(`${BASE_URL}/api/v1/publico/`)
             const pgs = await res.json()
             setPgs(pgs)
         }
         getPgs()
-    })
+    }, pgs)
 
     return (
         <div className="p-8">

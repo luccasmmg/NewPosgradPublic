@@ -7,6 +7,7 @@ import { useState } from 'react'
 import fetchRetry from '../lib/fetchRetry'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 
 export async function getStaticPaths() {
     const res = await fetch('http://localhost:8000/api/v1/publico/')
@@ -214,6 +215,7 @@ function About({ about }) {
 export default function PostGraduation({ pgData, classesData, newsList, covenants, events, examiningBoards }) {
     return(
         <Layout>
+            <Head><title>{pgData.name}</title></Head>
             <div className="flex justify-center flex-wrap content-center bg-gradient-to-r from-red-600 via-red-500 to-red-400 w-full px-4 md:px-6 text-xl text-gray-800 leading-normal">
                 <div className="flex justify-center w-full items-center">
                     <h1 className="lg:mx-36 pb-12 pt-8 text-6xl text-white font-bold">{pgData.name}</h1>

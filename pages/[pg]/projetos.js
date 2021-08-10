@@ -44,7 +44,6 @@ function ListOfProjects({ projects, title }) {
 
 export default function Projects({ projects }) {
     const keys = Object.keys(projects)
-    console.log(keys)
     return(
         <BasicPage title="Projetos">
             {keys.map(key => <ListOfProjects projects={projects[key]} title={key} />)}

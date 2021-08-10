@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleNotch, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 import fetchRetry from '../../lib/fetchRetry'
+import BASE_URL from '../api/config'
 
 export async function getStaticPaths() {
     return getPgs()
@@ -104,7 +105,7 @@ export default function Classes({ initialClasses }) {
 
     const updateClasses = async function(value) {
         setClasses('')
-        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg}/turmas?year=${value}`)
+        const res = await fetch(`${BASE_URL}/api/v1/publico/${pg}/turmas?year=${value}`)
         const classes = await res.json()
         const parsedClasses = classes.map(_class => mapKeys(_class, (v, k) => camelCase(k)))
         setClasses(parsedClasses)

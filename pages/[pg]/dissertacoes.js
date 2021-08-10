@@ -5,6 +5,7 @@ import getPgs from '../../lib/getPgs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown, faCircleNotch } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import BASE_URL from '../api/config'
 
 export async function getStaticPaths() {
     return getPgs()
@@ -32,7 +33,7 @@ export default function Publications({ initialPublications, pg }) {
 
     const getPublications = async function() {
         setLoading(true)
-        const res = await fetch(`http://localhost:8000/api/v1/publico/${pg.initials}/${pg.courses[0].id}/repositorio_institucional?offset=${offset + 20}`)
+        const res = await fetch(`${BASE_URL}/api/v1/publico/${pg.initials}/${pg.courses[0].id}/repositorio_institucional?offset=${offset + 20}`)
         const publicationsToPush = await res.json()
         setOffset(offset + 20)
         publicationsToPush.length == 0 ? setFull(true) : setFull(full)
