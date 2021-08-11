@@ -106,7 +106,7 @@ function News({ newsList, pg }) {
             <ol>
                 {newsList.map(news => <li key={news.index} className="py-1"><Link href={`/${pg.toLowerCase()}/noticias/${news.index}`}>{news.title}</Link><strong>({news.date})</strong></li>)}
             </ol>
-            <Link href={`/${pg}/noticias`}><a className="text-red-400">Clique aqui para ver o resto das notícias</a></Link>
+            <Link href={`/${pg.toLowerCase()}/noticias`}><a className="text-red-400">Clique aqui para ver o resto das notícias</a></Link>
         </div>
     )
 }
