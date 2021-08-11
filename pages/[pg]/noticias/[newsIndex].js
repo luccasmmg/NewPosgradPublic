@@ -32,7 +32,7 @@ export default function News({ news }) {
     return(
         <BasicPage>
             <div className="flex flex-wrap justify-between">
-                <div key={news.index} className="my-2 w-full flex-grow px-4 py-6 border-b-4 border-blue-400">
+                <div key={news.index} className="my-2 w-full flex-grow px-4 py-6 border-b-4 border-red-400">
                     <h1 className="text-3xl py-2 text-gray-900">{news.title}</h1>
                     <h4 className="text-gray-600">{news.date}</h4>
                     <div dangerouslySetInnerHTML={{ __html: news.body }} />

@@ -104,7 +104,7 @@ function News({ newsList, pg }) {
                 <h1 className="text-red-900 text-2xl"><FontAwesomeIcon icon={faNewspaper} />{' '}Noticias</h1>
             </div>
             <ol>
-                {newsList.map(news => <li key={news.index} className="py-1"><Link href={`/${pg}/noticias/${news.index}`}>{news.title}</Link><strong>({news.date})</strong></li>)}
+                {newsList.map(news => <li key={news.index} className="py-1"><Link href={`/${pg.toLowerCase()}/noticias/${news.index}`}>{news.title}</Link><strong>({news.date})</strong></li>)}
             </ol>
             <Link href={`/${pg}/noticias`}><a className="text-red-400">Clique aqui para ver o resto das notícias</a></Link>
         </div>
