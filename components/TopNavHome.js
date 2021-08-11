@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 import { Transition } from '@headlessui/react'
+import BASE_URL from '../pages/api/config';
 
 function SubMenu({ children }) {
     const node = useRef()
@@ -54,7 +55,7 @@ export default function TopNav() {
 
     useEffect(() => {    
         async function getPgs() {
-            const res = await fetch('http://localhost:8000/api/v1/publico/')
+            const res = await fetch(`${BASE_URL}/api/v1/publico/`)
             const pgs = await res.json()
             setPgs(pgs)
         }
