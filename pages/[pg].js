@@ -141,7 +141,7 @@ function ExaminingBoards({ examiningBoards }) {
             </div>
         <table className="schedule-table">
             <tbody>
-                {examiningBoards.map(examiningBoard => {
+                {examiningBoards.slice(0, 4).map(examiningBoard => {
                     const date = new Date(examiningBoard.dataDefesa);
                     return(
                         <tr key={examiningBoard.idBancaPosGraduacao} className="schedule-container">
