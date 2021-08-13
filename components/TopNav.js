@@ -68,7 +68,7 @@ export default function TopNav() {
                         <DividerTitle title="Ensino" />
                         <NavLink href='disciplinas' title='Disciplinas' linkIcon={faChalkboardTeacher}/>
                         <NavLink href='discentes' title='Discentes' linkIcon={faUserGraduate}/>
-                        <NavLink href='professores' title='Docentes' linkIcon={faAppleAlt}/>
+                        <NavLink href='docentes' title='Docentes' linkIcon={faAppleAlt}/>
                         <NavLink href='turmas' title='Turmas' linkIcon={faTable}/>
                         <hr></hr>
                         <DividerTitle title="Pesquisa e Extensão" />
