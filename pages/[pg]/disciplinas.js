@@ -79,7 +79,7 @@ function SyllabusList({ components, title }) {
 
 export default function Books({ syllabus }) {
     return(
-        <BasicPage title="DISCIPLINAS">
+        <BasicPage title="Disciplinas">
                 { syllabus.map(groupOfComponents => {
                     return(<SyllabusGroup key={groupOfComponents.name} components={groupOfComponents.list} title={groupOfComponents.name} />)
                 })}

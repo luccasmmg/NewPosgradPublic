@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
 
 export default function Plans({ plans }) {
     return(
-        <BasicPage title="ATAs">
+        <BasicPage title="Planos">
             <DocumentsTable documents={plans} firstTH="Data de Aprovação" secondTH="Título" />
         </BasicPage>
     )

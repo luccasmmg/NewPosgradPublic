@@ -27,7 +27,7 @@ function ListOfCovenants({ covenants, title }) {
             </div>
             {covenants.map(covenant => {
                 return(
-                    <div key={covenant.id} className="px-4 py-2 border-b-4 border-red-400">
+                    <div key={covenant.id} className="my-2 px-4 py-2 border-b-4 border-red-400">
                         <h3 className="py-2"><strong>Instituição: </strong>{covenant.initials} - {covenant.name}</h3>
                         <h4><strong>Objeto: </strong></h4>
                         <div dangerouslySetInnerHTML={{ __html: covenant.object }} />

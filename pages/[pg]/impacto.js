@@ -18,7 +18,7 @@ export async function getStaticProps({ params }) {
 
 export default function Impact({ impact }) {
     return(
-        <BasicPage title="IMPACTO">
+        <BasicPage title="Impacto">
             <div className="flex flex-wrap justify-between">
                 <div className="my-2 w-full flex-grow px-4 py-6 border-b-4 border-red-400">
                     <div dangerouslySetInnerHTML={{ __html: impact.body }} />

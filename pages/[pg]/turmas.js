@@ -112,7 +112,7 @@ export default function Classes({ initialClasses }) {
     }
 
     return(
-        <BasicPage title="TURMAS">
+        <BasicPage title="Turmas">
                 <SearchForm updateClasses={updateClasses} />
                 {classes &&
                     <>

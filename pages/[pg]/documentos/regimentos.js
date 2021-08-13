@@ -20,7 +20,7 @@ export async function getStaticProps({ params }) {
 
 export default function Regiments({ regiments }) {
     return(
-        <BasicPage title="ATAs">
+        <BasicPage title="Regimentos">
             <DocumentsTable documents={regiments} firstTH="Ano" secondTH="Título" />
         </BasicPage>
     )

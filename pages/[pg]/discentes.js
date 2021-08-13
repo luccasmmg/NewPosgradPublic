@@ -87,7 +87,7 @@ function StudentsList({ students }) {
 
 export default function Students({ coursesWithStudents }) {
     return(
-        <BasicPage title="DISCENTES">
+        <BasicPage title="Discentes">
                 { coursesWithStudents.map(courseWithStudents => {
                     return(<StudentGroup key={courseWithStudents.courseName} students={orderBy(courseWithStudents.students, 'nome')} title={courseWithStudents.courseName}/>)
                 })}

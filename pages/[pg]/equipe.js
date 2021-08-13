@@ -38,7 +38,7 @@ function Card({ person }) {
             </div>
             <div id="header" className="flex flex-wrap flex-col align-center"> 
             <div className={`${checkCoordinator(person) ? 'rounded-full' : ''} flex justify-center`}>
-                <img alt="Foto de perfil" className={`${!checkCoordinator(person) ? 'w-1/3 rounded-full' : 'rounded-md'}`} src={person.photo} />
+                <img alt="Foto de perfil" className={`${!checkCoordinator(person) ? 'w-24 h-24 rounded-full' : 'w-64 h-64 rounded-full'}`} src={person.photo} />
             </div>
             <p id="Descrição" className="mx-1 text-gray-800 mt-2">{person.description}</p>
             </div>

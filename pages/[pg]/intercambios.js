@@ -12,7 +12,6 @@ export async function getStaticProps({ params }) {
     const res = await fetch(`http://localhost:8000/api/v1/publico/${params.pg}/participacoes`)
     const participations = await res.json()
     const groupedParticipations = groupBy(participations, (x) => x.category)
-    console.log(groupedParticipations)
     return {
         props: {
             participations: groupedParticipations
@@ -43,7 +42,7 @@ function ListOfParticipations({ participations, title }) {
 
 export default function Participations({ participations }) {
     return(
-        <BasicPage title="INTERCÂMBIOS">
+        <BasicPage title="Intercâmbios">
             { participations.cooperation_agreement && 
                 <ListOfParticipations participations={participations.cooperation_agreement} title="Acordos de Cooperação" />
             }

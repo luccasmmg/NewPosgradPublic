@@ -88,7 +88,7 @@ function ProfessorsList({ professors }) {
 
 export default function Books({ professors }) {
     return(
-        <BasicPage title="PROFESSORES">
+        <BasicPage title="Docentes">
                 <ProfessorsGroup professors={professors} />
                 <ProfessorsList professors={professors} />
         </BasicPage>

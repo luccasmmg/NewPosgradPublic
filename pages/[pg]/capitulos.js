@@ -25,7 +25,7 @@ export async function getStaticProps({ params }) {
 
 export default function Chapters({ chapters }) {
     return(
-        <BasicPage title="CAPÍTULOS DE LIVROS">
+        <BasicPage title="Capítulos de livros">
             <div className="flex flex-wrap justify-between">
                 { chapters.map(chapter => {
                     return(
